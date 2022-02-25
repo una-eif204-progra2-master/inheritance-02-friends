@@ -13,44 +13,30 @@
  * =====================================================================================
  */
 
-#include <iostream>  // allows program to output data to the screen
+// C++ program to demonstrate the working of friend function
 
-struct Base {
-    friend int main();
-public:
-    int numA = 0;
-protected:
-    int numB = 1;
-protected:
-    int numC = 2;
+#include <iostream>
+using namespace std;
+
+class Distance {
+    private:
+        int meter;
+        
+        // friend function
+        friend int addFive(Distance distance) {
+          //accessing private members from the friend function
+          distance.meter += 5;
+          return distance.meter;
+        }
+
+    public:
+        Distance() : meter(0) {}
+        
 };
 
-struct Derived: public Base {
-    friend int main();
-    Derived() {
-        numA = 3;
-    }
-
-public:
-    int numD = 3;
-protected:
-    int numE = 4;
-private:
-    int numF = 5;
-};
-
-// function main begins program execution
 int main() {
-    std::cout << "Welcome to the UNA!" << std::endl;  // display message
-
-    Derived derived;
-    derived.numA = 2;
-    derived.numB = 2;
-    derived.numC = 2;
-    derived.numD = 2;
-    derived.numE = 2;
-    derived.numF = 2;
-
-    return 0;  // indicate that program ended successfully
-}  // end function main
-
+    cout << "Welcome to the UNA!" << std::endl;  // display message
+    Distance distance;
+    cout << "Distance: " << addFive(distance) << std::endl;
+    return 0;
+}
